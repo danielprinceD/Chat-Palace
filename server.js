@@ -13,6 +13,18 @@ const io = socketio(Server);
 
 io.on("connection", (sock) => {
   console.log("New User");
+  sock.on("clientMsg", (msg) => {
+    console.log("From Client ", msg);
+  });
+  sock.broadcast.emit("for_all", {
+    from: "Admin",
+    message: "New User",
+    createdAt: new Date().toLocaleString(),
+  });
+  sock.emit("serverMsg", {
+    from: "server",
+    message: "hello buddy...!",
+  });
   sock.on("disconnect", () => {
     console.log("User Disconnected....!");
   });
