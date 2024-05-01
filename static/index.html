@@ -10,12 +10,16 @@
          socket.emit("clientMsg" , {
           from : "daniel prince",
           message : "Hi Bro ...!"
+        } ,  (msg)=> {
+          console.log("This is Callback")
+          console.log(msg);
         })
         socket.on('for_all' , (message)=>{
           console.log("User added " , message)
         })
-        socket.on('serverMsg' , (msg)=>{
+        socket.on('serverMsg' , (msg , Callback)=>{
           console.log("From client : ", msg)
+          Callback('Yes Iam')
         })
         console.log("Connected to server..!")
       })
