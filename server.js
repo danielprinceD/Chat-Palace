@@ -1,4 +1,5 @@
 const path = require("path");
+const moment = require("moment");
 const dotenv = require("dotenv");
 const http = require("http");
 const socketio = require("socket.io");
@@ -48,4 +49,5 @@ io.on("connection", (sock) => {
 app.use(express.static(static_loc));
 Server.listen(port, () => {
   console.log("Server is Running...!");
+  console.log(moment().format("LT"));
 });
