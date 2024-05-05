@@ -18,6 +18,11 @@ io.on("connection", (sock) => {
     console.log("From Client ", msg);
     callback("Server got the message");
   });
+
+  sock.on("message", (msg, callback) => {
+    sock.broadcast.emit("message", msg);
+  });
+
   sock.broadcast.emit("for_all", Generate_Message("Admin", "Good Morning"));
   sock.emit(
     "serverMsg",

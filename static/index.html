@@ -1,29 +1,19 @@
-<html>
-  <head> </head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat Palace</title>
+  </head>
   <body>
-    <h1>Hello </ht>
-    </body>
+    <h1>Hello</h1>
+    <form action="">
+      <legend>Welcome to Chat Palace</legend>
+      <label for="messager">Enter the message : </label>
+      <input type="text" title="message" name="message" id="messagebox" />
+      <button type="submit" id="submitbtn" title="submit">Send</button>
+    </form>
     <script src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript">
-      const socket = io() 
-      socket.on('connect',  () => {
-         socket.emit("clientMsg" , {
-          from : "daniel prince",
-          message : "Hi Bro ...!"
-        } ,  (msg)=> {
-          console.log("This is Callback")
-          console.log(msg);
-        })
-        socket.on('for_all' , (message)=>{
-          console.log("User added " , message)
-        })
-        socket.on('serverMsg' , (msg , Callback)=>{
-          console.log("From client : ", msg)
-          Callback('Yes Iam')
-        })
-        console.log("Connected to server..!")
-      })
-
-
-    </script>
+    <script src="js/index.js"></script>
+  </body>
 </html>
