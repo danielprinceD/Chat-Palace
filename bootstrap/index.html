@@ -10,31 +10,34 @@
     />
   </head>
   <style>
-    .row{
-        height:  200px;
-        
+    .row {
+      height: 200px;
     }
-    [class*="col"]{
-        color: white;
-        text-align: center;
-        place-content: center;
+    [class*="col"] {
+      color: white;
+      text-align: center;
+      place-content: center;
     }
   </style>
   <h1>Hello</h1>
-   <div class="container-fluid d-flex
-    border">Content</div>
-    <div class="container-sm">
-        <div class="row ">
-        <div class="col-sm bg-primary border">Column 1 </div>
-        <div class="border col bg-danger"><div class="child">Column 2</div></div>
+  <div class="container-fluid d-flex border">Content</div>
+  <div class="container-sm">
+    <div class="row">
+      <div class="col-sm bg-primary border">Column 1</div>
+      <div class="border col bg-danger"><div class="child">Column 2</div></div>
     </div>
-        <div class="row ">
-        <div class="col-B bg-primary border">Column 1 </div>
-        <div class="border col bg-danger">Column 2</div>
+    <div class="row">
+      <div class="col-B bg-primary border">Column 1</div>
+      <div class="border col bg-danger">Column 2</div>
     </div>
-    </div>
-  </nav>
-  
+  </div>
+  <div class="container-fluid border">
+    <button class="btn" style="color: white; background-color: red">
+      Click Me
+    </button>
+    <button class="btn btn-warning">Click Me</button>
+    <button class="btn btn-warning" disabled>Disabled</button>
+  </div>
 
   <body>
     <script src="../node_modules/bootstrap/dist//js/bootstrap.bundle.js"></script>
