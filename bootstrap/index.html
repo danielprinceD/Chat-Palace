@@ -9,23 +9,32 @@
       href="../node_modules/bootstrap/dist/css/bootstrap.css"
     />
   </head>
+  <style>
+    .row{
+        height:  200px;
+        
+    }
+    [class*="col"]{
+        color: white;
+        text-align: center;
+        place-content: center;
+    }
+  </style>
   <h1>Hello</h1>
-    <div class="mb-3">
-        <label for="" class="form-label">Email</label>
-        <input
-            type="email"
-            class="form-control"
-            name=""
-            id=""
-            aria-describedby="emailHelpId"
-            placeholder="abc@mail.com"
-        />
-        <small id="emailHelpId" class="form-text text-muted"
-            >Help text</small
-        >
+   <div class="container-fluid d-flex
+    border">Content</div>
+    <div class="container-sm">
+        <div class="row ">
+        <div class="col-sm bg-primary border">Column 1 </div>
+        <div class="border col bg-danger"><div class="child">Column 2</div></div>
     </div>
-     
+        <div class="row ">
+        <div class="col-B bg-primary border">Column 1 </div>
+        <div class="border col bg-danger">Column 2</div>
+    </div>
+    </div>
   </nav>
+  
 
   <body>
     <script src="../node_modules/bootstrap/dist//js/bootstrap.bundle.js"></script>
