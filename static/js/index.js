@@ -32,6 +32,11 @@ socket.on("message", (msg, callback) => {
 
   const li = document.createElement("li");
   li.innerHTML = `${msg.from} : ${msg.message} -  - ${new Date().toJSON()}`;
+  let a = document.createElement("a");
+  a.setAttribute("href", msg.url);
+  a.setAttribute("target", "_blank");
+  a.innerHTML = "My Location";
+  document.querySelector("body").append(a);
   document.querySelector("body").appendChild(li);
 });
 
@@ -42,4 +47,23 @@ document.getElementById("submitbtn").addEventListener("click", (e) => {
   socket.emit("message", { from: "user", message: message }, function () {});
 
   messagebox("");
+});
+
+document.getElementById("locator").addEventListener("click", (e) => {
+  e.preventDefault();
+  if (!navigator.geolocation) alert("Geo Location is not Supported");
+  console.log(
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        socket.emit("location", {
+          lat: position.coords.latitude,
+          long: position.coords.longitude,
+          alt: position.coords.altitude,
+        });
+      },
+      () => {
+        alert("Cant fetch Location");
+      }
+    )
+  );
 });

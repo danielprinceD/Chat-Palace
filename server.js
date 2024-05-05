@@ -23,6 +23,14 @@ io.on("connection", (sock) => {
     sock.broadcast.emit("message", msg);
   });
 
+  sock.on("location", (msg, callback) => {
+    io.emit("message", {
+      from: "Admin",
+      message: `${msg.lat} ${msg.long}`,
+      url: `https://www.google.com/maps?q=${msg.lat} , ${msg.long}`,
+    });
+  });
+
   sock.broadcast.emit("for_all", Generate_Message("Admin", "Good Morning"));
   sock.emit(
     "serverMsg",
