@@ -21,6 +21,23 @@
   </style>
   <h1 class="d-block d-sm-none">Hello</h1>
 
+<!-- Toast -->
+
+  <div id="popup" class="alert shadow-lg m-4 position-fixed end-0 z-3 bg-white" role="alert" >
+    <div class="toast-header">
+
+      <img src="https://picsum.photos/seed/picsum/20"  
+      class="rounded mx-3">  
+      <strong class="me-auto">Notify</strong>
+      <small>Days ago</small>
+      <button  id="noty" class="btn bg-danger ms-5 "></button>
+    </div>
+    <div class="toast-body m-3 ">
+      Hello Everyone
+    </div>
+  </div>
+
+
 <!-- Alert -->
 
 <div class="container">
@@ -221,6 +238,14 @@
 
 
   <body>
+    <script>
+      popup = document.getElementById("popup")
+      noty = document.getElementById("noty");
+      noty.addEventListener("click" , ()=>{
+        popup.classList.add("d-none")
+       
+      })
+    </script>
     <script src="../node_modules/bootstrap/dist//js/bootstrap.bundle.js"></script>
   </body>
 </html>
