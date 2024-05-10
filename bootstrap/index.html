@@ -99,7 +99,7 @@
 
 <!-- Forms -->
 <div class="container">
-<form action="" class="form">
+<form action="" class="form needs-validation" novalidate>
   <label for="email" class="form-label lead ">
     Email : 
   </label>
@@ -116,17 +116,27 @@
 <label for="comments" class="form-label lead">Comments</label>
   <textarea name="" class="form-control" id="" cols="30" rows="10" 
   placeholder="Write comments "></textarea>
-</form>
-
-<div class="form-floating my-4">
-  <textarea name="floater" id="floater" cols="30" rows="10" class="form-control"
-  placeholder="Write Something"></textarea>
-  <label for="floater" class="form-label" >Write Something</label>
-</div>
-
+  
+  <div class="form-floating my-4">
+    <textarea name="floater" id="floater" cols="30" rows="10" class="form-control"
+    placeholder="Write Something" ></textarea>
+  
+    <label for="floater" class="form-label" >Write Something</label>
+    
+  </div>
+  
+  <div class="form-check-inline" >
+    <input type="radio" class="form-check-input" name="gender" id="male" required />
+    <label for="male" class="">male</label> 
+    <input type="radio" class="form-check-input" name="gender" id="female" required>
+    <label for="female" class="">Female</label>
+    <div class="invalid-feedback">Fill</div>
+  </div>
+  
   <br>
-  <button class="btn btn-outline-primary mx-auto d-block px-5">Submit</button>
+  <button type="submit" class="btn btn-outline-primary mx-auto d-block px-5">Submit</button>
 </div>
+</form>
 <br>
 
 
