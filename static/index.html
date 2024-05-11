@@ -3,18 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/bootstrap-icons.css" />
+    <link rel="stylesheet" href="./css/bootstrap.css" />
     <title>Chat Palace</title>
   </head>
   <body>
-    <h1>Hello</h1>
-    <form action="">
-      <legend>Welcome to Chat Palace</legend>
+    <style>
+      li {
+        padding: 10px 20px;
+      }
+    </style>
+    <div class="container font-monospace rounded border-dark pb-4 border">
+      <header
+        class="container rounded-5 bg-primary text-white py-3 h5 text-center"
+      >
+        Welcome to Chat Palace
+      </header>
+      <main
+        class="container-fluid overflow-auto"
+        style="height: 80vh"
+        id="chatbox"
+      >
+        <ul class="m-4 list-unstyled" id="textbox"></ul>
+      </main>
+      <footer class="container text-center">
+        <form action="" class="form">
+          <div class="row">
+            <div class="col-8">
+              <input
+                id="messagebox"
+                type="text"
+                placeholder="Message"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="col">
+              <button
+                id="submitbtn"
+                class="rounded-5 btn bg-primary text-white"
+              >
+                Send
+              </button>
+              <button id="locator" class="rounded-5 btn bg-primary text-white">
+                Locate
+              </button>
+            </div>
+          </div>
+        </form>
+      </footer>
+    </div>
+
+    <!-- 
+
+    <form>
       <label for="messager">Enter the message : </label>
       <input type="text" title="message" name="message" id="messagebox" />
       <button type="submit" id="submitbtn" title="submit">Send</button>
       <button title="location" id="locator" type="button">Send Location</button>
-    </form>
+    </form> -->
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/index.js"></script>
+    <script src="./js/bootstrap.bundle.js"></script>
   </body>
 </html>

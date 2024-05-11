@@ -17,8 +17,9 @@ socket.on("connect", () => {
   socket.on("serverMsg", (msg, Callback) => {
     console.log("From client : ", msg);
     const li = document.createElement("li");
+    li.classList.add("shadow");
     li.innerHTML = `${msg.from} : ${msg.text} `;
-    document.querySelector("body").appendChild(li);
+    document.getElementById("textbox").appendChild(li);
     Callback("Yes Iam");
   });
   console.log("Connected to server..!");
@@ -31,13 +32,14 @@ socket.on("message", (msg, callback) => {
   console.log(msg);
 
   const li = document.createElement("li");
+  li.classList.add("shadow");
   li.innerHTML = `${msg.from} : ${msg.message} -  - ${new Date().toJSON()}`;
   let a = document.createElement("a");
   a.setAttribute("href", msg.url);
   a.setAttribute("target", "_blank");
   a.innerHTML = "My Location";
-  document.querySelector("body").append(a);
-  document.querySelector("body").appendChild(li);
+  document.getElementById("textbox").append(a);
+  document.getElementById("textbox").appendChild(li);
 });
 
 document.getElementById("submitbtn").addEventListener("click", (e) => {
