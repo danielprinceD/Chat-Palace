@@ -48,6 +48,6 @@ io.on("connection", (sock) => {
 
 app.use(express.static(static_loc));
 Server.listen(port, () => {
-  console.log("Server is Running...!");
+  console.log(`Server is Running on Port ${port} ...!`);
   console.log(moment().format("LT"));
 });

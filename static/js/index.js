@@ -40,6 +40,8 @@ socket.on("message", (msg, callback) => {
   a.innerHTML = "My Location";
   document.getElementById("textbox").append(a);
   document.getElementById("textbox").appendChild(li);
+  message = document.querySelector("ul").lastElementChild;
+  message.scrollIntoView();
 });
 
 document.getElementById("submitbtn").addEventListener("click", (e) => {
