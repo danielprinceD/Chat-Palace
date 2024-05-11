@@ -8,16 +8,33 @@
     <title>Chat Palace</title>
   </head>
   <body>
-    <style>
-      li {
-        padding: 10px 20px;
-      }
-    </style>
+    <div class="offcanvas font-monospace top-0 w-50 fade" id="people">
+      <div class="offcanvas-header bg-primary rounded-bottom-5">
+        <div class="h3 text-white">Peoples</div>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="list-unstyled h5 text-center">
+          <li class="border rounded-4 py-2">Daniel</li>
+        </ul>
+      </div>
+    </div>
     <div class="container font-monospace rounded border-dark pb-4 border">
       <header
         class="container rounded-5 bg-primary text-white py-3 h5 text-center"
       >
-        Welcome to Chat Palace
+        <div class="row">
+          <div class="col-1 mx-auto">
+            <button
+              class="btn navbar navbar-dark"
+              data-bs-target="#people"
+              data-bs-toggle="offcanvas"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+
+          <div class="col align-content-center">Welcome to Chat Palace</div>
+        </div>
       </header>
       <main
         class="container-fluid overflow-auto"
