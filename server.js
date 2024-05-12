@@ -21,6 +21,7 @@ io.on("connection", (sock) => {
     if (!ValidSting(params.name) || !ValidSting(params.room)) {
       return callback("Enter Valid Inputs");
     }
+    
     sock.broadcast.to(params.room).emit("message", {
       from: "Admin",
       message: `${params.name} has joined the room`,

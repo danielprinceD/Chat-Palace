@@ -8,6 +8,12 @@ socket.on("connect", () => {
     room: object.get("room"),
   };
 
+  const li = document.createElement("li");
+  li.classList.add("shadow");
+  li.classList.add("text-center");
+  li.innerHTML = `You have Joined in the ${params.room} Room`;
+  document.getElementById("textbox").appendChild(li);
+
   socket.on("people", (msg) => {
     let people = document.getElementById("peoples");
     people.innerHTML = "";
@@ -73,7 +79,6 @@ socket.on("connect", () => {
     li.classList.add("shadow");
     li.innerHTML = `${msg.from} : ${msg.text} `;
     document.getElementById("textbox").appendChild(li);
-    Callback("Yes Iam");
   });
   console.log("Connected to server..!");
 });
