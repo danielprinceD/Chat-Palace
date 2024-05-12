@@ -9,7 +9,7 @@ class User {
   }
   get_list(room) {
     let users = this.users.filter((u) => u.room === room);
-    name_list = users.map((u) => u.name);
+    let name_list = users.map((u) => u.name);
     return name_list;
   }
   getUser(id) {

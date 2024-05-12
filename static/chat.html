@@ -18,7 +18,7 @@
         <div class="h3 text-white">Peoples</div>
       </div>
       <div class="offcanvas-body">
-        <ul class="list-unstyled h5 text-center">
+        <ul class="list-unstyled h5 text-center" id="peoples">
           <li class="border rounded-4 py-2">Daniel</li>
         </ul>
       </div>
@@ -54,7 +54,7 @@
         ></ul>
       </main>
       <footer class="container text-center">
-        <for class="form">
+        <form class="form" action=`/chat.html/${windows.location.search}`>
           <div class="row">
             <div class="col-8">
               <input
@@ -67,8 +67,9 @@
             </div>
             <div class="col">
               <button
+                type="submit"
                 id="submitbtn"
-                class="rounded-5 btn bg-primary text-white"
+                class="rounded-5 btn bg-primary text-white d-none"
               >
                 Send
               </button>
@@ -77,7 +78,7 @@
               </button>
             </div>
           </div>
-        </for>
+        </form>
       </footer>
     </div>
 

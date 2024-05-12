@@ -21,18 +21,21 @@ io.on("connection", (sock) => {
     if (!ValidSting(params.name) || !ValidSting(params.room)) {
       return callback("Enter Valid Inputs");
     }
-    console.log(sock.id);
+    sock.broadcast.to(params.room).emit("message", {
+      from: "Admin",
+      message: `${params.name} has joined the room`,
+    });
     sock.join(params.room);
     user.removeUser(sock.id);
     user.addUser(sock.id, params.name, params.room);
-    console.log(user.users, "**");
+
+    io.to(params.room).emit("people", user.get_list(params.room));
+
     sock.on("message", (msg, callback) => {
-      console.log(msg);
       sock.broadcast.to(params.room).emit("message", msg);
     });
   });
 
-  console.log("New User");
   sock.on("clientMsg", (msg, callback) => {
     console.log("From Client ", msg);
     callback("Server got the message");
@@ -46,18 +49,16 @@ io.on("connection", (sock) => {
     });
   });
 
-  sock.broadcast.emit("for_all", Generate_Message("Admin", "Good Morning"));
-  sock.emit(
-    "serverMsg",
-    Generate_Message("Server", "Hello Buddy ...!"),
-    (msg) => {
-      console.log("Are You User ?");
-      console.log(msg);
-    }
-  );
   sock.on("disconnect", () => {
-    user.removeUser(sock.id);
-    console.log("User Disconnected....!");
+    let current = user.removeUser(sock.id);
+
+    if (current) {
+      sock.to(current.room).emit("people", user.get_list(current.room));
+      sock.to(current.room).emit("message", {
+        from: "Admin",
+        message: `${current.name} has left the room`,
+      });
+    }
   });
 });
 

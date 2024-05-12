@@ -8,10 +8,27 @@ socket.on("connect", () => {
     room: object.get("room"),
   };
 
-  socket.emit("join", params, (err) => {
-    if (err) {
-      alert(err);
+  socket.on("people", (msg) => {
+    let people = document.getElementById("peoples");
+    people.innerHTML = "";
+    for (let i = 0; i < msg.length; i++) {
+      let li = document.createElement("li");
+      li.classList.add("border");
+      li.classList.add("rounded-4");
+      li.classList.add("py-2");
+      li.classList.add("list-unstyled");
+      li.classList.add("text-center");
+      li.classList.add("h5");
+
+      li.innerHTML = msg[i];
+      people.appendChild(li);
+    }
+  });
+
+  socket.emit("join", params, (call) => {
+    if (call) {
       window.location.href = "/index.html";
+      return alert(err);
     } else {
       console.log("Joined");
     }
@@ -98,4 +115,15 @@ document.getElementById("locator").addEventListener("click", (e) => {
       }
     )
   );
+});
+
+document.getElementById("messagebox").addEventListener("keyup", (e) => {
+  let value = e.target.value;
+  let btn = document.getElementById("submitbtn");
+  if (value.trim().length > 0) {
+    btn.classList.remove("d-none");
+  }
+  if (value.trim().length == 0) {
+    btn.classList.add("d-none");
+  }
 });
