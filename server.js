@@ -6,6 +6,7 @@ const socketio = require("socket.io");
 const static_loc = path.join(__dirname, "static");
 const User = require("./Utils/user");
 const express = require("express");
+const router = require("./Route/auth_route");
 const { Generate_Message } = require("./Utils/message");
 const ValidSting = require("./Utils/ValidString");
 dotenv.config();
@@ -15,13 +16,14 @@ const app = express();
 const Server = http.createServer(app);
 const io = socketio(Server);
 const user = new User();
+app.use(express.json());
 
 io.on("connection", (sock) => {
   sock.on("join", (params, callback) => {
     if (!ValidSting(params.name) || !ValidSting(params.room)) {
       return callback("Enter Valid Inputs");
     }
-    
+
     sock.broadcast.to(params.room).emit("message", {
       from: "Admin",
       message: `${params.name} has joined the room`,
@@ -68,3 +70,5 @@ Server.listen(port, () => {
   console.log(`Server is Running on Port ${port} ...!`);
   console.log(moment().format("LT"));
 });
+
+app.use(router);
