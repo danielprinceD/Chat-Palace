@@ -4,8 +4,10 @@ const dotenv = require("dotenv");
 const http = require("http");
 const socketio = require("socket.io");
 const static_loc = path.join(__dirname, "static");
+
 const express = require("express");
 const { Generate_Message } = require("./Utils/message");
+const ValidSting = require("./Utils/ValidString");
 dotenv.config();
 console.log("Static File : ", static_loc);
 const port = process.env.PORT || 5000;
@@ -14,6 +16,13 @@ const Server = http.createServer(app);
 const io = socketio(Server);
 
 io.on("connection", (sock) => {
+  sock.on("join", (params, callback) => {
+    console.log(params);
+    if (!ValidSting(params.name) || !ValidSting(params.room)) {
+      callback("Enter Valid Inputs");
+    }
+  });
+
   console.log("New User");
   sock.on("clientMsg", (msg, callback) => {
     console.log("From Client ", msg);

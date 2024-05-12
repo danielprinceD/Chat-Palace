@@ -1,5 +1,22 @@
 const socket = io();
 socket.on("connect", () => {
+  query = window.location.search;
+  object = new URLSearchParams(query);
+
+  let params = {
+    name: object.get("displayer"),
+    room: object.get("room"),
+  };
+
+  socket.emit("join", params, (err) => {
+    console.log(params);
+    if (err) {
+      alert(err);
+      window.location.href = "/index.html";
+    } else {
+      console.log("Joined");
+    }
+  });
   socket.emit(
     "clientMsg",
     {
