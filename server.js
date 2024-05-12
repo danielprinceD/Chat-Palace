@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const http = require("http");
 const socketio = require("socket.io");
 const static_loc = path.join(__dirname, "static");
-
+const User = require("./Utils/user");
 const express = require("express");
 const { Generate_Message } = require("./Utils/message");
 const ValidSting = require("./Utils/ValidString");
@@ -14,15 +14,18 @@ const port = process.env.PORT || 5000;
 const app = express();
 const Server = http.createServer(app);
 const io = socketio(Server);
+const user = new User();
 
 io.on("connection", (sock) => {
-  params = {};
   sock.on("join", (params, callback) => {
     if (!ValidSting(params.name) || !ValidSting(params.room)) {
-      callback("Enter Valid Inputs");
+      return callback("Enter Valid Inputs");
     }
-
+    console.log(sock.id);
     sock.join(params.room);
+    user.removeUser(sock.id);
+    user.addUser(sock.id, params.name, params.room);
+    console.log(user.users, "**");
     sock.on("message", (msg, callback) => {
       console.log(msg);
       sock.broadcast.to(params.room).emit("message", msg);
@@ -53,6 +56,7 @@ io.on("connection", (sock) => {
     }
   );
   sock.on("disconnect", () => {
+    user.removeUser(sock.id);
     console.log("User Disconnected....!");
   });
 });

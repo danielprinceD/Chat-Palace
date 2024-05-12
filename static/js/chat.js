@@ -14,7 +14,6 @@ socket.on("connect", () => {
       window.location.href = "/index.html";
     } else {
       console.log("Joined");
-      socket.join(params.room);
     }
   });
   // socket.emit(
@@ -35,8 +34,18 @@ socket.on("connect", () => {
   document.getElementById("submitbtn").addEventListener("click", (e) => {
     e.preventDefault();
     const message = document.getElementById("messagebox").value;
-
-    socket.emit("message", { from: "user", message: message }, function () {});
+    const li = document.createElement("li");
+    li.classList.add("shadow");
+    li.classList.add("text-end");
+    li.innerHTML = `${message} : Me`;
+    document.getElementById("textbox").appendChild(li);
+    messagearea = document.querySelector("ul").lastElementChild;
+    messagearea.scrollIntoView();
+    socket.emit(
+      "message",
+      { from: params.name, message: message },
+      function () {}
+    );
 
     messagebox("");
   });
@@ -56,16 +65,17 @@ let messagebox = (message) =>
   (document.getElementById("messagebox").value = message);
 
 socket.on("message", (msg, callback) => {
-  console.log(msg);
-
   const li = document.createElement("li");
+
   li.classList.add("shadow");
-  li.innerHTML = `${msg.from} : ${msg.message} -  - ${new Date().toJSON()}`;
-  let a = document.createElement("a");
-  a.setAttribute("href", msg.url);
-  a.setAttribute("target", "_blank");
-  a.innerHTML = "My Location";
-  document.getElementById("textbox").append(a);
+  li.innerHTML = `${msg.from} : ${msg.message}`;
+  if (msg.url) {
+    let a = document.createElement("a");
+    a.setAttribute("href", msg.url);
+    a.setAttribute("target", "_blank");
+    a.innerHTML = "My Location";
+    document.getElementById("textbox").append(a);
+  }
   document.getElementById("textbox").appendChild(li);
   message = document.querySelector("ul").lastElementChild;
   message.scrollIntoView();
