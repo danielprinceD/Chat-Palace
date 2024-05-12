@@ -13,7 +13,8 @@ socket.on("connect", () => {
   li.classList.add("text-center");
   li.innerHTML = `You have Joined in the ${params.room} Room`;
   document.getElementById("textbox").appendChild(li);
-
+  let area = document.getElementById("textbox").lastElementChild;
+  area.scrollIntoView();
   socket.on("people", (msg) => {
     let people = document.getElementById("peoples");
     people.innerHTML = "";
@@ -62,7 +63,7 @@ socket.on("connect", () => {
     li.classList.add("text-end");
     li.innerHTML = `${message} : Me`;
     document.getElementById("textbox").appendChild(li);
-    messagearea = document.querySelector("ul").lastElementChild;
+    let messagearea = document.getElementById("textbox").lastElementChild;
     messagearea.scrollIntoView();
     socket.emit(
       "message",
@@ -99,8 +100,7 @@ socket.on("message", (msg, callback) => {
     document.getElementById("textbox").append(a);
   }
   document.getElementById("textbox").appendChild(li);
-  message = document.querySelector("ul").lastElementChild;
-  message.scrollIntoView();
+  li.scrollIntoView();
 });
 
 document.getElementById("locator").addEventListener("click", (e) => {
