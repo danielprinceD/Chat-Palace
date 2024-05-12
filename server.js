@@ -16,21 +16,23 @@ const Server = http.createServer(app);
 const io = socketio(Server);
 
 io.on("connection", (sock) => {
+  params = {};
   sock.on("join", (params, callback) => {
-    console.log(params);
     if (!ValidSting(params.name) || !ValidSting(params.room)) {
       callback("Enter Valid Inputs");
     }
+
+    sock.join(params.room);
+    sock.on("message", (msg, callback) => {
+      console.log(msg);
+      sock.broadcast.to(params.room).emit("message", msg);
+    });
   });
 
   console.log("New User");
   sock.on("clientMsg", (msg, callback) => {
     console.log("From Client ", msg);
     callback("Server got the message");
-  });
-
-  sock.on("message", (msg, callback) => {
-    sock.broadcast.emit("message", msg);
   });
 
   sock.on("location", (msg, callback) => {

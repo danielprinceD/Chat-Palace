@@ -9,28 +9,38 @@ socket.on("connect", () => {
   };
 
   socket.emit("join", params, (err) => {
-    console.log(params);
     if (err) {
       alert(err);
       window.location.href = "/index.html";
     } else {
       console.log("Joined");
+      socket.join(params.room);
     }
   });
-  socket.emit(
-    "clientMsg",
-    {
-      from: "daniel prince",
-      message: "Hi Bro ...!",
-    },
-    (msg) => {
-      console.log("This is Callback");
-      console.log(msg);
-    }
-  );
-  socket.on("for_all", (message) => {
-    console.log("User added ", message);
+  // socket.emit(
+  //   "clientMsg",
+  //   {
+  //     from: "daniel prince",
+  //     message: "Hi Bro ...!",
+  //   },
+  //   (msg) => {
+  //     console.log("This is Callback");
+  //     console.log(msg);
+  //   }
+  // );
+  // // socket.on("for_all", (message) => {
+  // //   console.log("User added ", message);
+  // // });
+
+  document.getElementById("submitbtn").addEventListener("click", (e) => {
+    e.preventDefault();
+    const message = document.getElementById("messagebox").value;
+
+    socket.emit("message", { from: "user", message: message }, function () {});
+
+    messagebox("");
   });
+
   socket.on("serverMsg", (msg, Callback) => {
     console.log("From client : ", msg);
     const li = document.createElement("li");
@@ -59,15 +69,6 @@ socket.on("message", (msg, callback) => {
   document.getElementById("textbox").appendChild(li);
   message = document.querySelector("ul").lastElementChild;
   message.scrollIntoView();
-});
-
-document.getElementById("submitbtn").addEventListener("click", (e) => {
-  e.preventDefault();
-  const message = document.getElementById("messagebox").value;
-
-  socket.emit("message", { from: "user", message: message }, function () {});
-
-  messagebox("");
 });
 
 document.getElementById("locator").addEventListener("click", (e) => {
