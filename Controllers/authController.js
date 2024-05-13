@@ -16,7 +16,6 @@ module.exports.signup_post = async (req, res) => {
       email: email,
       password: password,
     });
-    create.save();
     res.status(200).json(create);
   } catch (err) {
     if (err.code === 11000)
