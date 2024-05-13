@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const http = require("http");
 const socketio = require("socket.io");
 const static_loc = path.join(__dirname, "static");
+const mongoose = require("mongoose");
 const User = require("./Utils/user");
 const express = require("express");
 const router = require("./Route/auth_route");
@@ -69,6 +70,10 @@ app.use(express.static(static_loc));
 Server.listen(port, () => {
   console.log(`Server is Running on Port ${port} ...!`);
   console.log(moment().format("LT"));
+});
+
+mongoose.connect(`${process.env.DB}`).then((res) => {
+  console.log("DB Connected");
 });
 
 app.use(router);
