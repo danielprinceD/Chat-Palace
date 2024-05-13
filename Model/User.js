@@ -18,6 +18,11 @@ const Users = new mongoose.Schema({
   },
 });
 
+Users.pre("save", function (next) {
+  
+  next();
+});
+
 const User = mongoose.model("user", Users);
 
 module.exports = User;
