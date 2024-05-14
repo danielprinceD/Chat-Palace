@@ -2,6 +2,7 @@ const path = require("path");
 const moment = require("moment");
 const dotenv = require("dotenv");
 const http = require("http");
+const controller = require("./Controllers/authController");
 const socketio = require("socket.io");
 const static_loc = path.join(__dirname, "static");
 const cookieParser = require("cookie-parser");
@@ -68,19 +69,11 @@ io.on("connection", (sock) => {
   });
 });
 
+app.use("*", controller.checkuser);
 app.use(express.static(static_loc));
 Server.listen(port, () => {
   console.log(`Server is Running on Port ${port} ...!`);
   console.log(moment().format("LT"));
-});
-
-app.get("/set-cookies", (req, res) => {
-  res.cookie("");
-});
-
-app.get("/get-cookies", (req, res) => {
-  const cookies = req.cookies;
-  res.json(cookies);
 });
 
 mongoose.connect(`${process.env.DB}`).then((res) => {

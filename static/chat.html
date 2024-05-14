@@ -12,7 +12,17 @@
       padding: 10px 20px;
     }
   </style>
-  <body>
+  <body onload="loader()">
+    <div class="container px-4 justify-content-between d-flex">
+      <div class="text-start h6 bg-primary py-2 px-3 rounded-4 text-white" id="namer">
+      </div>
+      <div class="d-inline">
+
+        <button onclick="logout()" class=" btn btn-danger rounded-4 py-1 px-3">
+          Logout
+        </button>
+      </div>
+      </div>
     <div class="offcanvas font-monospace top-0 w-50 fade" id="people">
       <div class="offcanvas-header bg-primary rounded-bottom-5">
         <div class="h3 text-white">Peoples</div>
@@ -58,6 +68,7 @@
           <div class="row">
             <div class="col-8">
               <input
+                
                 id="messagebox"
                 type="text"
                 placeholder="Message"
@@ -91,6 +102,18 @@
       <button title="location" id="locator" type="button">Send Location</button>
     </form> -->
     <script src="/socket.io/socket.io.js"></script>
+    <script>
+      async function logout() {
+        localStorage.setItem("email" , "")
+        const res = await fetch("/logout", {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+        window.location.href = "/login.html";
+      }
+    if (!localStorage.getItem("email")) window.location.href = "/login.html";
+      document.getElementById("namer").textContent = "Welcome " + localStorage.getItem("email")
+    </script>
     <script src="js/chat.js"></script>
     <script src="./js/bootstrap.bundle.js"></script>
   </body>
